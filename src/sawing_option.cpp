@@ -1,7 +1,4 @@
-// This is a personal academic project. Dear PVS-Studio, please check it.
-// PVS-Studio Static Code Analyzer for C, C++ and C#: http://www.viva64.com
-
-#include <KP2/sawing_option.h>
+#include <KP3/sawing_option.h>
 
 std::string SawingOptionToString(SawingOption option)
 {
@@ -35,7 +32,7 @@ std::string SawingOptionToString(SawingOption option)
 
 SawingOption IntToSawingOption(int option)
 {
-  SawingOption return_option;
+  SawingOption return_option {};
   switch (option)
   {
   case (kBeam):

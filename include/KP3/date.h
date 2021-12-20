@@ -1,5 +1,5 @@
-#ifndef _KP2_INCLUDE_KP2_DATE_H_
-#define _KP2_INCLUDE_KP2_DATE_H_
+#ifndef _KP3_INCLUDE_KP3_DATE_H_
+#define _KP3_INCLUDE_KP3_DATE_H_
 
 #include <iostream>
 
@@ -21,11 +21,15 @@ public:
   Date &SetMonth(int month);
   Date &SetYear(int year);
 
+  // Extra functions
   void Print();
+  static bool IsYearLeap(int year);
 
   // Operators
   bool operator==(const Date &copy);
   bool operator!=(const Date &copy);
+
+  Date operator+(const Date &obj);
 
   friend std::ostream &operator<<(std::ostream &out, const Date &obj);
   friend std::istream &operator>>(std::istream &in, Date &obj);

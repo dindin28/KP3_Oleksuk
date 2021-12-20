@@ -1,7 +1,7 @@
-#ifndef _KP2_INCLUDE_KP2_WORKSHOP_H_
-#define _KP2_INCLUDE_KP2_WORKSHOP_H_
+#ifndef _KP3_INCLUDE_KP3_WORKSHOP_H_
+#define _KP3_INCLUDE_KP3_WORKSHOP_H_
 
-#include <KP2/lumber.h>
+#include <KP3/lumber.h>
 
 class Workshop
 {

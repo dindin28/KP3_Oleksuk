@@ -1,7 +1,4 @@
-// This is a personal academic project. Dear PVS-Studio, please check it.
-// PVS-Studio Static Code Analyzer for C, C++ and C#: http://www.viva64.com
-
-#include <KP2/date.h>
+#include <KP3/date.h>
 
 #include <ctime>
 #include <iomanip>
@@ -29,25 +26,18 @@ Date::Date()
   month = (now->tm_mon + 1);
   year = (now->tm_year + 1900);
   */
-  std::cout << "Date()" << std::endl;
 }
 
 Date::Date(int day, int month, int year)
     : day_(day), month_(month), year_(year)
-{
-  std::cout << "Date(int day, int month, int year)" << std::endl;
-}
+{}
 
 Date::Date(const Date &copy)
     : day_(copy.day_), month_(copy.month_), year_(copy.year_)
-{
-  std::cout << "Date(const Date &copy)" << std::endl;
-}
+{}
 
 Date::~Date()
-{
-  std::cout << "~Date()" << std::endl;
-}
+{}
 
 // Getters
 int Date::GetDay() { return day_; }
@@ -92,6 +82,136 @@ bool Date::operator!=(const Date &copy)
 {
   return !operator==(copy);
 }
+
+Date Date::operator+(const Date &obj)
+{
+  int _day = obj.day_ + day_;
+  int _month = obj.month_ + month_;
+  int _year = obj.year_ + year_;
+  while (_month > 12)
+  {
+    _year++;
+    _month -= 12;
+  }
+  int dayInYear = _day;
+  _month--;
+  while (_month > 0)
+  {
+    if (_month == 1 || _month == 3 || _month == 5 || _month == 7 || _month == 8 || _month == 10 || _month == 12)
+    {
+      _month--;
+      dayInYear += 31;
+      continue;
+    }
+    if ((_month == 2 && !IsYearLeap(_year)) || (_month == 2 && IsYearLeap(_year)))
+    {
+      _month--;
+      if (IsYearLeap(_year))
+      {
+        dayInYear += 29;
+      }
+      else
+      {
+        dayInYear += 28;
+      }
+      continue;
+    }
+    if ((_month == 4 || _month == 6 || _month == 9 || _month == 11))
+    {
+      _month--;
+      dayInYear += 30;
+      continue;
+    }
+  }
+  _month = 1;
+  if ((dayInYear > 365 && !IsYearLeap(_year)) || (dayInYear > 366 && IsYearLeap(_year)))
+  {
+    _year++;
+    if (IsYearLeap(_year))
+    {
+      dayInYear -= 366;
+    }
+    else
+    {
+      dayInYear -= 365;
+    }
+  }
+  if (dayInYear > 31)
+  {
+    _month++;
+    dayInYear -= 31;
+  } //January
+  if ((dayInYear > 28 && !IsYearLeap(_year)) || (dayInYear > 29 && IsYearLeap(_year)))
+  {
+    _month++;
+    if (IsYearLeap(_year))
+    {
+      dayInYear -= 29;
+    }
+    else
+    {
+      dayInYear -= 28;
+    }
+  } //February
+  if (dayInYear > 31)
+  {
+    _month++;
+    dayInYear -= 31;
+  } //March
+  if (dayInYear > 30)
+  {
+    _month++;
+    dayInYear -= 30;
+  } //April
+  if (dayInYear > 31)
+  {
+    _month++;
+    dayInYear -= 31;
+  } //May
+  if (dayInYear > 30)
+  {
+    _month++;
+    dayInYear -= 30;
+  } //June
+  if (dayInYear > 31)
+  {
+    _month++;
+    dayInYear -= 31;
+  } //July
+  if (dayInYear > 31)
+  {
+    _month++;
+    dayInYear -= 31;
+  } //August
+  if (dayInYear > 30)
+  {
+    _month++;
+    dayInYear -= 30;
+  } //September
+  if (dayInYear > 31)
+  {
+    _month++;
+    dayInYear -= 31;
+  } //October
+  if (dayInYear > 30)
+  {
+    _month++;
+    dayInYear -= 30;
+  } //November
+  if (dayInYear > 31)
+  {
+    _month++;
+    dayInYear -= 31;
+  } //December
+  return Date(dayInYear, _month, _year);
+}
+
+bool Date::IsYearLeap(int year)
+{
+  if ((year % 4 == 0 && year % 100 != 0) || (year % 400 == 0))
+    return true;
+  return false;
+} // Function (IsYearLeap)
 
 std::ostream &operator<<(std::ostream &out, const Date &obj)
 {

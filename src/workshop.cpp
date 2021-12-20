@@ -1,7 +1,4 @@
-// This is a personal academic project. Dear PVS-Studio, please check it.
-// PVS-Studio Static Code Analyzer for C, C++ and C#: http://www.viva64.com
-
-#include <KP2/workshop.h>
+#include <KP3/workshop.h>
 
 #include <iostream>
 
@@ -12,8 +9,6 @@ Workshop::Workshop()
     : workshop_serial_number_(workshops_count_ + 1), size_(0), pointer_(nullptr)
 {
   workshops_count_++;
-
-  std::cout << "Workshop()" << std::endl;
 }
 
 // Constructor with parameters
@@ -21,8 +16,6 @@ Workshop::Workshop(int workshop_serial_number)
     : workshop_serial_number_(workshop_serial_number), size_(0), pointer_(nullptr)
 {
   workshops_count_++;
-
-  std::cout << "Workshop(int workshop_serial_number)" << std::endl;
 }
 
 // Copy constructor
@@ -36,8 +29,6 @@ Workshop::Workshop(const Workshop &copy)
   }
 
   workshops_count_++;
-
-  std::cout << "Workshop(int workshop_serial_number)" << std::endl;
 }
 
 Workshop::~Workshop()
@@ -46,8 +37,6 @@ Workshop::~Workshop()
   {
     delete[] pointer_;
   }
-
-  std::cout << "~Workshop()" << std::endl;
 }
 
 // operator=
@@ -187,4 +176,9 @@ bool Workshop::RemoveWood(const Wood value)
     }   // Condition (pointer_[i].GetToy() == value)
   }     // for loop (i < size_ && is_valid_to_sell == false)
   return is_valid_to_sell;
+}
+
+Lumber &Workshop::operator[](const int index)
+{
+  return pointer_[index];
 }

@@ -1,9 +1,9 @@
-#ifndef _KP2_INCLUDE_KP2_LUMBER_H_
-#define _KP2_INCLUDE_KP2_LUMBER_H_
+#ifndef _KP3_INCLUDE_KP3_LUMBER_H_
+#define _KP3_INCLUDE_KP3_LUMBER_H_
 
-#include <KP2/wood.h>
-#include <KP2/date.h>
-#include <KP2/sawing_option.h>
+#include <KP3/wood.h>
+#include <KP3/date.h>
+#include <KP3/sawing_option.h>
 
 class Lumber : public Wood
 {
@@ -40,7 +40,14 @@ public:
   int GetCost() const;
 
   // Function for printing class info
-  void Print();
+  virtual void Print();
+
+  // Operators
+
+  Lumber operator+(const Lumber& obj);
+
+  bool operator<(const Lumber& obj);
+  bool operator>(const Lumber& obj);
 
   friend std::ostream &operator<<(std::ostream &out, const Lumber &copy);
   friend std::istream &operator>>(std::istream &in, Lumber &copy);

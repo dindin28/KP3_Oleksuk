@@ -1,7 +1,4 @@
-// This is a personal academic project. Dear PVS-Studio, please check it.
-// PVS-Studio Static Code Analyzer for C, C++ and C#: http://www.viva64.com
-
-#include <KP2/wood.h>
+#include <KP3/wood.h>
 
 #include <cstring>
 #include <iostream>
@@ -12,8 +9,6 @@ Wood::Wood()
   const char *tree_species = "Pine";
   tree_species_ = new char[strlen(tree_species) + 1];
   strcpy(tree_species_, tree_species);
-
-  std::cout << "Wood()" << std::endl;
 }
 
 // Constructor with parameters
@@ -22,8 +17,6 @@ Wood::Wood(const char *tree_species, int wood_moisture, int wood_density)
 {
   tree_species_ = new char[strlen(tree_species) + 1];
   strcpy(tree_species_, tree_species);
-
-  std::cout << "Wood(const char *tree_species, int wood_moisture, int wood_density)" << std::endl;
 }
 
 // Copy constructor
@@ -32,8 +25,6 @@ Wood::Wood(const Wood &copy)
 {
   tree_species_ = new char[strlen(copy.tree_species_) + 1];
   strcpy(tree_species_, copy.tree_species_);
-
-  std::cout << "Wood(const Wood &copy)" << std::endl;
 }
 
 // operator =
@@ -66,8 +57,6 @@ Wood::~Wood()
   {
     delete[] tree_species_;
   }
-
-  std::cout << "~Wood()" << std::endl;
 }
 
 // Setters

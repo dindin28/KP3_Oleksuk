@@ -1,38 +1,27 @@
-// This is a personal academic project. Dear PVS-Studio, please check it.
-// PVS-Studio Static Code Analyzer for C, C++ and C#: http://www.viva64.com
-
-#include <KP2/lumber.h>
+#include <KP3/lumber.h>
 
 #include <iostream>
 
 // Default constructor(with no parameters)
 Lumber::Lumber()
     : Wood(), sawing_option_(kBeam), delivery_date_(Date()), marking_(0), amount_(5), cost_(100)
-{
-  std::cout << "Lumber()" << std::endl;
-}
+{}
 
 // Constructor with parameters
 Lumber::Lumber(Wood wood, SawingOption sawing_option, Date delivery_date,
                int marking, int amount, int cost)
     : Wood(wood), sawing_option_(sawing_option),
       delivery_date_(delivery_date), marking_(marking), amount_(amount), cost_(cost)
-{
-  std::cout << "Lumber(Wood, SawingOption, Date, int, int, int)" << std::endl;
-}
+{}
 
 // Copy constructor
 Lumber::Lumber(const Lumber &copy)
     : Wood(copy.GetWood()), sawing_option_(copy.sawing_option_),
       delivery_date_(copy.delivery_date_), marking_(copy.marking_), amount_(copy.amount_), cost_(copy.cost_)
-{
-  std::cout << "Lumber(const Lumber &copy)" << std::endl;
-}
+{}
 
 Lumber::~Lumber()
-{
-  std::cout << "~Lumber()" << std::endl;
-}
+{}
 
 // Setters
 Lumber &Lumber::SetWood(const Wood &wood)
@@ -83,6 +72,31 @@ void Lumber::Print()
             << "(" << delivery_date_ << "), "
             << "marking: " << marking_ << ", amount: "
             << amount_ << ", cost: " << cost_ << std::endl;
+}
+
+// Operators
+
+Lumber Lumber::operator+(const Lumber& obj)
+{
+  if(this->GetWood() == obj.GetWood())
+  {
+    return Lumber(GetWood(),
+                  sawing_option_,
+                  delivery_date_ + obj.delivery_date_,
+                  marking_ + obj.marking_,
+                  amount_ + obj.amount_,
+                  cost_ + obj.cost_);
+  }
+  return *this;
+}
+
+bool Lumber::operator<(const Lumber& obj)
+{
+  return cost_ < obj.cost_;
+}
+bool Lumber::operator>(const Lumber& obj)
+{
+  return cost_ > obj.cost_;
 }
 
 std::ostream &operator<<(std::ostream &out, const Lumber &copy)

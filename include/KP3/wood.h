@@ -1,5 +1,5 @@
-#ifndef _KP2_INCLUDE_KP2_WOOD_H_
-#define _KP2_INCLUDE_KP2_WOOD_H_
+#ifndef _KP3_INCLUDE_KP3_WOOD_H_
+#define _KP3_INCLUDE_KP3_WOOD_H_
 
 #include <iostream>
 
@@ -32,7 +32,7 @@ public:
   int GetWoodDensity() const;
 
   // Function to print class info
-  void Print();
+  virtual void Print();
 
   // Operators
   bool operator==(const Wood &copy);
